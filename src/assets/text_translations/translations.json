@@ -1,0 +1,170 @@
+{
+    "login": {
+        "en": "Log In",
+        "bg": "Влез"
+    },
+    "home": {
+        "en": "Home",
+        "bg": "Вкъщи"
+    },
+    "about": {
+        "en": "About",
+        "bg": "Относно"
+    },
+    "store": {
+        "en": "Store",
+        "bg": "Магазин"
+    },
+    "manage_users": {
+        "en": "Manage Users",
+        "bg": "потребители"
+    },
+    "account": {
+        "en": "Account",
+        "bg": "Сметка"
+    },
+    "noOrdersPt1": {
+        "en": "It seems like you have no orders yet, click",
+        "bg": "Изглежда, че все още нямате поръчки, щракнете"
+    },
+    "noOrdersPt2": {
+        "en": "to go to the store!",
+        "bg": "За да отидете в магазина!"
+    },
+    "create_account": {
+        "en": "Create Account",
+        "bg": "??"
+    },
+    "loginText1": {
+        "en": "Already have an account with us? Click",
+        "bg": "??"
+    },
+    "loginText2": {
+        "en": "to log in.",
+        "bg": "??"
+    },
+    "signupText1": {
+        "en": "Don't have an account with us yet?",
+        "bg": "Още нямате акаунт при нас?"
+    },
+    "signupText2": {
+        "en": "Sign up",
+        "bg": "Регистрирайте се"
+    },
+    "country": {
+        "en": "Country",
+        "bg": "??"
+    },
+    "phone_number": {
+        "en": "Phone Number",
+        "bg": "??"
+    },
+    "invalid_phone_number_format": {
+        "en": "Please enter a valid phone number.",
+        "bg": "??"
+    },
+    "here": {
+        "en": "here",
+        "bg": "Тук"
+    },
+    "required_field": {
+        "en": "Required field.",
+        "bg": "??"
+    },
+    "first_name": {
+        "en": "Name",
+        "bg": "??"
+    },
+    "surname": {
+        "en": "Surname",
+        "bg": "??"
+    },
+    "email": {
+        "en": "Email",
+        "bg": "??"
+    },
+    "password": {
+        "en": "Password",
+        "bg": "??"
+    },
+    "invalid_email_format": {
+        "en": "Please enter a valid email.",
+        "bg": "??"
+    },
+    "invalid_password_format": {
+        "en": "Password must be at least 8 characters and contain a combination of numbers and upper and lower case letters.",
+        "bg": "??"
+    },
+    "invalid_name": {
+        "en": "Please enter a valid name.",
+        "bg": "??"
+    },
+    "correct_form_errors": {
+        "en": "Please correct form errors to proceed.",
+        "bg": "??"
+    },
+    "continue": {
+        "en": "Continue",
+        "bg": "Продължи"
+    },
+    "contact_us": {
+        "en": "Contact Us:",
+        "bg": "??"
+    },
+    "currency": {
+        "en": "BGN",
+        "bg": "лв."
+    },
+    "select_size": {
+        "en": "SELECT SIZE:",
+        "bg": "??"
+    },
+    "add_to_basket": {
+        "en": "Add to Basket",
+        "bg": "??"
+    },
+    "size_chart_link": {
+        "en": "Size chart",
+        "bg": "??"
+    },
+    "basket": {
+        "en": "Basket",
+        "bg": "??"
+    },
+    "item": {
+        "en": "Item",
+        "bg": "??"
+    },
+    "size": {
+        "en": "Size",
+        "bg": "??"
+    },
+    "quantity": {
+        "en": "Quantity",
+        "bg": "??"
+    },
+    "price": {
+        "en": "Price",
+        "bg": "??"
+    },
+    "basket_is_empty": {
+        "en": "Basket is empty! Go to the store to add items.",
+        "bg": "??"
+    },
+    "subtotal": {
+        "en": "Subtotal",
+        "bg": "??"
+    },
+    "curreny": {
+        "en": "BGN",
+        "bg": "лв"
+    },
+    "checkout": {
+        "en": "Checkout",
+        "bg": "??"
+    },
+    "back_to_store_link": {
+        "en": "Back to Store",
+        "bg": "??"
+    }
+}

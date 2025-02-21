@@ -1,0 +1,177 @@
+#Section - User Management:
+
+In src/mainjsHelpers/FirestoreSetup.js i initialise firestore using the project config
+Set persistance for logged in state to browser
+
+OnAuthStateChanged which will run at startup, either there is already a user logged in
+    -in this case get their user id which is given by the user object returned
+     then run the vuex store action fetchUserData that will fetch the user details from the firestore using the ID provided. 
+     This will return a whole object with their data, for now im setting this in store, but in future it might be safer to 
+     TODO: only fetch and pick the data i need as the rest might be too much to have fetched every time
+
+TODO: change the size of flag icons to smaller size
+      
+If no user is signed in, set user object in firestore to blank object, which will dictate what happens when you 
+press the account icon and will give you the options to sign in or signup
+
+If the user icon in top left is clicked (TODO: in mobile its the link that says My Account):
+    -if user is authenticated based on the userAuthenticated global mixin
+    then it goes to the account page (additionally the persistance function in FirestoreSetup will handle 
+    a redirect to the login page if at any point the auth state changes TODO: check if it auto does it if an account gets locked for example)
+    -if user is not authed, it will take them to LoginPage.vue TODO: add validation to form so they cant login with 
+    blank feields, TODO: which also has a link to sign up
+     a new user.
+    -LoginPage.vue 
+        • simple form, on submit runs a method that attempts a login, the result from that is either an error 
+          TODO: message which is shown in red text to the user, or a true bool which indicates success and 
+          redirects the user to the account page
+    -SignupPage.vue
+        • Simple form on page, email and pass validation, also validated on press of submit. Extra logic around 
+          the email and password fields so they only validate once you move away on blur instead of after each char.
+          Then the createUserInFirestore action in firestore handles the creation of a user in firestore and also creating 
+          an instance of that user in the users collection in the DB so we have their name and other details prepapred like an 
+          empty orders list etc.
+
+#Section - Langauge handling: 
+    - to support multiple Langauges (eng and bg), the lang file in /src/assets provides versions and translations
+    for the multiple Langauges. It exports a function called textVar which is then imported and added as a global
+    function within src/mainjsHelpers/GLOBAL_vars_and_functions_Mixin.js 
+    example usage: <router-link to="/store">{{ textVar("store") || "Store" }}</router-link>
+
+  - The module i18n is used to handle and display the different versions of text based on the user selected lang
+  - located in src/assets/text_translations/i18n.js the module imports the translations json file and uses those 
+    entries to populate all text in the system
+  - in main.js the i18n js module is imported and added as a global component that can be used with 
+    $t("name_of_text_var")
+  - example usage: <router-link to="/store">{{ $t("store") || "Store" }}</router-link>
+  - TODO: figure out how to nest them for better organisation
+  - TODO: make it update the selected default lang of bg once a user is authed
+
+
+
+  TODO: on all save doc functions, save the changes to an audit table so i can see anything that changed by people. 
+  make sure its very locked down and only i can see it!!! personal data for all users will be there
+
+#Section - Store Page: 
+The plugin at the bottom of the vuex store always fetches the products TODO: Maybe move that to only happen if we open 
+a page that requires the products instead of using quota for fetching every time
+Once fetched, for each one we get the translations and add it to the i18n messages object.
+Then we can use a combination of the unique internal product id + the thing we want e.g the ProductName and display the
+correct translation for each product 
+
+#Section - Modules setup:
+- copy paste an existing module to keep its setup and change the name
+- in main.js 
+  - import the module like others (index.js will get picked up automatically). 
+  - define it in the registerModules call and object
+  - ensure the routing is correct
+  - use accross site 
+
+#Section - Router links:
+
+
+
+#Section - Basket Management:
+State
+basket Array that holds the current basket items. Each item is an object containing:
+{
+  internalProductId: "string", // Unique product identifier
+  quantity: number,           // Quantity of the product (1-999)
+  size: "string"              // Size of the product (e.g., "M", "L")
+}
+
+
+Mutations:
+addProductToBasket(state, product):
+Adds a product to the basket. If the product already exists (same internalProductId and size), increments its quantity.
+
+removeProductFromBasket(state, { internalProductId, size }):
+Decreases the quantity of a product. If the quantity becomes 0, removes the product entirely.
+
+deleteProductFromBasket(state, { internalProductId, size }):
+Completely removes a product from the basket, regardless of its quantity.
+
+setBasket(state, basketValue):
+Replaces the current basket with a new array of basket items.
+
+
+Actions:
+getBasketFromLocalStorage({ commit }):
+Fetches the basket from localStorage, decodes it, and sets it in the Vuex state.
+
+addProductToBasket({ commit, state }, productToAdd):
+Adds a product to the basket. If the product already exists, increments its quantity. Syncs the updated basket to localStorage.
+
+removeProductFromBasket({ commit }, { internalProductId, size }):
+Decreases the quantity of a product in the basket or removes it if the quantity becomes 0. Syncs the updated basket to localStorage.
+
+deleteProductFromBasket({ commit }, { internalProductId, size }):
+Completely removes a product from the basket and syncs the changes to localStorage.
+
+syncBasketToLocalStorage({ state }):
+Use: Automatically called after any mutation that changes the basket.
+Encodes the current basket as a Base64 string and saves it to localStorage.
+
+Plugins:
+Initializes the basket by dispatching getBasketFromLocalStorage during app startup.
+
+
+Usage Examples:
+Adding a Product:
+store.dispatch("addProductToBasket", {
+    internalProductId: "abc123",
+    quantity: 1,
+    size: "M"
+});
+
+Reducing Quantity:
+store.dispatch("removeProductFromBasket", {
+    internalProductId: "abc123",
+    size: "M"
+});
+
+Deleting a Product:
+store.dispatch("deleteProductFromBasket", {
+    internalProductId: "abc123",
+    size: "M"
+});
+
+Fetching the Basket from Local Storage:
+store.dispatch("getBasketFromLocalStorage");
+
+#Section - Basket Page:
+TODO: add checkout button and page
+
+
+
+No login just make it work TODO:
+- store page
+- individual item page
+- basket with session storage
+- checkout
+  - store the checkout details, (name, number, address, products, quantitiy, stripe payment confirmation and transaction id)
+- mobile view compatible 
+- super easy add to basket and checkout with address
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  TODOs:
+  store page
+  single item page
+  basket functionality
+  checkout. 
+  orders list
+  orders notifications - maybe manual at the start?
+
